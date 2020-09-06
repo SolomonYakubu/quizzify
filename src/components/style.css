@@ -1,0 +1,30 @@
+.options {
+	display: flex;
+	justify-content: center;
+}
+.options-container {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+.option-btn {
+	padding: 10px;
+	margin: 5px;
+	background: rgb(248, 54, 6);
+	border-radius: 5px;
+	font-family: Poppins;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+}
+.option-btn.correct {
+	background-color: green;
+}
+.display {
+	font-size: 18px;
+	margin-bottom: 50px;
+	color: #fff;
+}
+.display-container {
+	padding: 10px;
+}

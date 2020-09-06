@@ -1,0 +1,18 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Poppins;
+}
+@font-face {
+	font-family: "Poppins";
+	/* font-style: italic;
+	font-weight: 400; */
+	src: url("./fonts/poppings/poppins-v12-latin-regular.eot");
+	src: local("Poppings Regular"), local("Poppings-Regular"),
+		url("./fonts/poppings/poppins-v12-latin-regular.eot?#iefix")
+			format("embedded-opentype"),
+		url("./fonts/poppings/poppins-v12-latin-regular.woff2") format("woff2"),
+		url("./fonts/poppings/poppins-v12-latin-regular.woff") format("woff"),
+		url("./fonts/poppings/poppins-v12-latin-regular.ttf") format("truetype"),
+		url("./fonts/poppings/poppins-v12-latin-regular.svg#Poppings") format("svg");
+}

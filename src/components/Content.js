@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Display from "./Display";
 import Options from "./Options.js";
 import questions from "./QuestionStore";
@@ -8,7 +8,8 @@ const Content = () => {
 	const [question] = useState(questions);
 	const [correctOption, setCorrect] = useState(false);
 	const [id, SetId] = useState(Math.floor(1 + Math.random() * question.length));
-
+	const [score, setScore] = useState(0);
+	const [time, setTime] = useState(10);
 	const quest = question
 		.filter((question) => question.id === id)
 		.map((question) => question.question);
@@ -18,26 +19,46 @@ const Content = () => {
 	const correct = question
 		.filter((question) => question.id === id)
 		.map((question) => question.correct);
-
+	const next = () => {
+		SetId(Math.floor(1 + Math.random() * question.length));
+	};
+	const timer = () => {
+		setTime((time) => time - 1);
+	};
+	useEffect(() => {
+		setInterval(timer, 1000);
+		return () => {
+			clearInterval(timer);
+		};
+	}, []);
+	if (time === 0) {
+		setTime(10);
+		next();
+	}
 	const validate = (e) => {
 		if (e.toString() === correct.toString()) {
 			console.log("correct");
 			setCorrect(true);
+			setScore(score + 1);
 		} else {
 			console.log("incorrect");
 		}
 
 		setTimeout(() => {
 			setCorrect(false);
-			SetId(Math.floor(1 + Math.random() * question.length));
+			setTime(10);
+			next();
 		}, 1000);
+		clearInterval(timer);
 	};
 
 	return (
 		<div>
 			<Display question={quest} />
+			<p>{score}</p>
 			<Options options={option} validate={validate} correct={correctOption} />
 			<Controls />
+			<p>{time}</p>
 		</div>
 	);
 };

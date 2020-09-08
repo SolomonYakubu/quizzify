@@ -32,11 +32,13 @@ const Content = () => {
 		};
 	}, []);
 	if (time === 0) {
-		setTime(10);
-		next();
+		setTimeout(() => {
+			setTime(10);
+			next();
+		}, 300);
 	}
 	const validate = (e) => {
-		if (e.toString() === correct.toString()) {
+		if (e.toString().toLowerCase() === correct.toString().toLowerCase()) {
 			console.log("correct");
 			setCorrect(true);
 			setScore(score + 1);
@@ -48,7 +50,7 @@ const Content = () => {
 			setCorrect(false);
 			setTime(10);
 			next();
-		}, 1000);
+		}, 400);
 		clearInterval(timer);
 	};
 
@@ -56,9 +58,8 @@ const Content = () => {
 		<div>
 			<Display question={quest} />
 			<p>{score}</p>
+			<Controls time={time} />
 			<Options options={option} validate={validate} correct={correctOption} />
-			<Controls />
-			<p>{time}</p>
 		</div>
 	);
 };

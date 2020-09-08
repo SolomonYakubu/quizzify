@@ -7,8 +7,8 @@ const Options = (props) => {
 			<div className="options-container">
 				{option.map((opt) => (
 					<button
-						className="option-btn"
-						style={props.correct ? { background: "green" } : null}
+						className={props.correct ? "option-btn correct" : "option-btn"}
+						//	style={props.correct ? { background: "green" } : null}
 						value={opt.opt}
 						key={Math.random() * 20000}
 						onClick={(e) => props.validate(e.target.value)}

@@ -10,6 +10,7 @@ const Content = () => {
 	const [id, SetId] = useState(Math.floor(1 + Math.random() * question.length));
 	const [score, setScore] = useState(0);
 	const [time, setTime] = useState(10);
+
 	const quest = question
 		.filter((question) => question.id === id)
 		.map((question) => question.question);

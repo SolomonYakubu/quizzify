@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-	CircularProgressbar,
-	CircularProgressbarWithChildren,
-} from "react-circular-progressbar";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 function Controls(props) {
 	return (
@@ -12,7 +9,7 @@ function Controls(props) {
 				<CircularProgressbarWithChildren
 					value={props.time}
 					maxValue={10}
-					strokeWidth={8}
+					strokeWidth={10}
 					//styles={{ width: "20px" }}
 				>
 					<div style={{ fontSize: "37px", color: "#fff" }}>{props.time}</div>

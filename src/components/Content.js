@@ -56,7 +56,7 @@ const Content = () => {
 
 	return (
 		<div>
-			<Controls time={time} score={score} />
+			<Controls time={time} />
 			<Display question={quest} />
 			<Options options={option} validate={validate} correct={correct} />
 		</div>

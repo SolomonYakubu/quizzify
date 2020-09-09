@@ -51,7 +51,7 @@ const Content = () => {
 			setCorrect(false);
 			setTime(10);
 			next();
-		}, 400);
+		}, 1000);
 		clearInterval(timer);
 	};
 
@@ -60,7 +60,7 @@ const Content = () => {
 			<Display question={quest} />
 			<p>{score}</p>
 			<Controls time={time} />
-			<Options options={option} validate={validate} correct={correctOption} />
+			<Options options={option} validate={validate} correct={correct} />
 		</div>
 	);
 };

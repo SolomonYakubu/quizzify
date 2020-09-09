@@ -20,6 +20,9 @@
 .option-btn.correct {
 	background-color: green;
 }
+.option-btn.red {
+	background-color: red;
+}
 .display {
 	font-size: 24px;
 	margin-bottom: 50px;

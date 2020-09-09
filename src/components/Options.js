@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.css";
 const Options = (props) => {
 	const [option] = props.options;
-	const [right, setRight] = useState(true);
+
 	//console.log(props.correct);
 	const check = (e) => {
 		if (e.value.toString() === props.correct.toString()) {
@@ -19,7 +19,7 @@ const Options = (props) => {
 			<div className="options-container">
 				{option.map((opt, index) => (
 					<button
-						className={right ? "option-btn" : null}
+						className="option-btn"
 						value={opt}
 						key={index}
 						onClick={(e) => {

@@ -42,7 +42,7 @@ const Content = () => {
 		if (e.toString().toLowerCase() === correct.toString().toLowerCase()) {
 			console.log("correct");
 
-			setScore(score + 1);
+			setScore(score + 10);
 		} else {
 			console.log("incorrect");
 		}
@@ -56,9 +56,8 @@ const Content = () => {
 
 	return (
 		<div>
+			<Controls time={time} score={score} />
 			<Display question={quest} />
-			<p>{score}</p>
-			<Controls time={time} />
 			<Options options={option} validate={validate} correct={correct} />
 		</div>
 	);

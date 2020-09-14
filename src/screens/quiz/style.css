@@ -16,6 +16,7 @@
 	font-family: Poppins;
 	color: #fff;
 	font-size: 18px;
+	outline: none;
 	border: none;
 }
 .option-btn.correct {

@@ -7,6 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 90%;
+	margin-bottom: 50px;
 }
 .option-btn {
 	padding: 10px;
@@ -20,10 +21,10 @@
 	border: none;
 }
 .option-btn.correct {
-	background-color: green;
+	background-color: #3cb371;
 }
 .option-btn.red {
-	background-color: red;
+	background-color: #dc143c;
 }
 .display {
 	font-size: 24px;

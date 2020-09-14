@@ -9,6 +9,7 @@ const Content = (props) => {
 	const [question] = useState(questions);
 	//	const [count, setCount] = useState(props.questionNumber);
 	const [id, SetId] = useState(Math.floor(1 + Math.random() * question.length));
+	const [clicked, setClicked] = useState(0);
 
 	const [time, setTime] = useState(10);
 
@@ -27,6 +28,7 @@ const Content = (props) => {
 		.map((question) => question.correct);
 	const next = () => {
 		setTime(10);
+
 		if (count > 1) {
 			dispatch({ type: "count" });
 			SetId(Math.floor(1 + Math.random() * question.length));
@@ -34,6 +36,7 @@ const Content = (props) => {
 			dispatch({ type: "completeTrue" });
 			//dispatch({ type: "reset" });
 		}
+		setClicked(0);
 	};
 	const timer = () => {
 		setTime((time) => time - 1);
@@ -48,19 +51,24 @@ const Content = (props) => {
 	}, []);
 
 	const validate = (e) => {
-		if (e.value.toString().toLowerCase() === correct.toString().toLowerCase()) {
-			e.className = "option-btn correct";
-			dispatch({ type: "correct" });
-		} else {
-			e.className = "option-btn red";
+		setClicked((clicked) => clicked + 1);
+		if (clicked === 0) {
+			if (
+				e.value.toString().toLowerCase() === correct.toString().toLowerCase()
+			) {
+				e.className = "option-btn correct";
+				dispatch({ type: "correct" });
+			} else {
+				e.className = "option-btn red";
+			}
+
+			setTimeout(() => {
+				e.className = "option-btn";
+
+				next();
+			}, 1000);
+			clearInterval(timer);
 		}
-
-		setTimeout(() => {
-			e.className = "option-btn";
-
-			next();
-		}, 1000);
-		clearInterval(timer);
 	};
 	if (time === 0) {
 		next();

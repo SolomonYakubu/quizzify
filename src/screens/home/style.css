@@ -6,7 +6,7 @@
 .input {
 	padding: 5px;
 	text-align: center;
-	margin: 20px;
+	margin-bottom: 20px;
 	outline: none;
 	font-size: 18px;
 	border: none;
@@ -32,6 +32,7 @@
 	height: 400px;
 	border-radius: 10px;
 	margin-bottom: 70px;
+	position: relative;
 }
 .button {
 	padding: 6px;

@@ -15,7 +15,9 @@ const Content = (props) => {
 		<div className="container">
 			<div className="title">Welcome QuizNinja</div>
 			<div className="item-con">
-				<label style={{ fontFamily: "Poppins", fontSize: "16px" }}>
+				<label
+					style={{ fontFamily: "Poppins", fontSize: "16px", margin: "20px" }}
+				>
 					Input Number Of Questions
 				</label>
 				<input

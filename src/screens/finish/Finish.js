@@ -11,7 +11,6 @@ const Finish = () => {
 
 	const reset = () => {
 		dispatch({ type: "reset" });
-		console.log(globalState);
 	};
 	return (
 		<div className="container">

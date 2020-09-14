@@ -31,8 +31,6 @@ const Content = (props) => {
 			dispatch({ type: "count" });
 			SetId(Math.floor(1 + Math.random() * question.length));
 		} else {
-			console.log(globalState.state.score);
-
 			dispatch({ type: "completeTrue" });
 			//dispatch({ type: "reset" });
 		}
@@ -68,7 +66,6 @@ const Content = (props) => {
 		next();
 	}
 
-	console.log(count);
 	return (
 		<div>
 			<Controls time={time} />

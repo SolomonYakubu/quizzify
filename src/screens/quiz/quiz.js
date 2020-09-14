@@ -4,19 +4,18 @@ import Options from "./Options.js";
 import questions from "../../db/QuestionStore";
 import Controls from "./Controls.js";
 import { store } from "../../store";
-import { Redirect, Router } from "react-router-dom";
+
 const Content = (props) => {
 	const [question] = useState(questions);
-	const [count, setCount] = useState(props.questionNumber);
+	//	const [count, setCount] = useState(props.questionNumber);
 	const [id, SetId] = useState(Math.floor(1 + Math.random() * question.length));
-	const [score, setScore] = useState(0);
+
 	const [time, setTime] = useState(10);
-	const [complete, setComplete] = useState(false);
 
 	//context api
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
-
+	const { count } = globalState.state;
 	const quest = question
 		.filter((question) => question.id === id)
 		.map((question) => question.question);
@@ -29,11 +28,11 @@ const Content = (props) => {
 	const next = () => {
 		setTime(10);
 		if (count > 1) {
-			setCount((count) => count - 1);
+			dispatch({ type: "count" });
 			SetId(Math.floor(1 + Math.random() * question.length));
 		} else {
 			console.log(globalState.state.score);
-			setComplete(true);
+
 			dispatch({ type: "completeTrue" });
 			//dispatch({ type: "reset" });
 		}
@@ -43,9 +42,7 @@ const Content = (props) => {
 	};
 
 	useEffect(() => {
-		if (!complete) {
-			setInterval(timer, 1000);
-		}
+		setInterval(timer, 1000);
 
 		return () => {
 			clearInterval(timer);
@@ -56,7 +53,6 @@ const Content = (props) => {
 		if (e.value.toString().toLowerCase() === correct.toString().toLowerCase()) {
 			e.className = "option-btn correct";
 			dispatch({ type: "correct" });
-			setScore(score + 10);
 		} else {
 			e.className = "option-btn red";
 		}
@@ -71,10 +67,7 @@ const Content = (props) => {
 	if (time === 0) {
 		next();
 	}
-	if (complete) {
-		console.log(complete);
-		//	return <Redirect to="/" />;
-	}
+
 	console.log(count);
 	return (
 		<div>

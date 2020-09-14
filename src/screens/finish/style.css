@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.items-container {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	margin: auto;
+	width: 90%;
+}
+.button {
+	padding: 10px;
+	outline: none;
+	margin: 30px;
+}
+.text {
+	font-size: 24px;
+	font-family: Poppins;
+}

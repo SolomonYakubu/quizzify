@@ -31,7 +31,7 @@ const Content = (props) => {
 				pauseOnHover: true,
 				draggable: false,
 				fontFamily: "Poppins",
-				toastId: "toast",
+				//	toastId: "toast",
 				progress: undefined,
 			});
 		}
@@ -42,7 +42,7 @@ const Content = (props) => {
 			<div className="title">Welcome QuizNinja</div>
 
 			<div className="item-con">
-				<ToastContainer />
+				<ToastContainer limit={1} />
 				<label
 					style={{ fontFamily: "Poppins", fontSize: "16px", margin: "20px" }}
 				>

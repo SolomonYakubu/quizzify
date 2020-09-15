@@ -7,16 +7,19 @@ import { store } from "../../store";
 
 const Content = (props) => {
 	const [question] = useState(questions);
-	//	const [count, setCount] = useState(props.questionNumber);
-	const [id, SetId] = useState(Math.floor(1 + Math.random() * question.length));
+	const [questionId, setQuestionId] = useState([]);
+	const [id, SetId] = useState(1);
 	const [clicked, setClicked] = useState(0);
-
+	const [index, setIndex] = useState(1);
 	const [time, setTime] = useState(10);
 
+	const [shuffled, setShuffled] = useState(false);
 	//context api
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
 	const { count } = globalState.state;
+
+	//data fetching
 	const quest = question
 		.filter((question) => question.id === id)
 		.map((question) => question.question);
@@ -26,23 +29,41 @@ const Content = (props) => {
 	const correct = question
 		.filter((question) => question.id === id)
 		.map((question) => question.correct);
+	//
+	//function will take care of moving to next question
 	const next = () => {
 		setTime(10);
 
 		if (count > 1) {
 			dispatch({ type: "count" });
-			SetId(Math.floor(1 + Math.random() * question.length));
+			SetId(questionId[index]);
 		} else {
 			dispatch({ type: "completeTrue" });
-			//dispatch({ type: "reset" });
 		}
 		setClicked(0);
+		setIndex((index) => index + 1);
 	};
+	//Timer function
 	const timer = () => {
 		setTime((time) => time - 1);
 	};
+	//shuffle an array without repeating values
+	const shuffle = (arr) => {
+		arr.sort(() => Math.random() - 0.5);
+	};
+	//Checked if shuffled is true, then shuffle questionId
+
+	if (shuffled) {
+		shuffle(questionId);
+		SetId(questionId[0]);
+		setShuffled(false);
+	}
 
 	useEffect(() => {
+		setQuestionId(question.map((id) => id.id));
+
+		setShuffled(true);
+
 		setInterval(timer, 1000);
 
 		return () => {

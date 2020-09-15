@@ -69,7 +69,7 @@ const Content = (props) => {
 		return () => {
 			clearInterval(timer);
 		};
-	}, []);
+	}, [question]);
 
 	const validate = (e) => {
 		setClicked((clicked) => clicked + 1);

@@ -1,13 +1,13 @@
 .options {
 	display: flex;
 	justify-content: center;
-	padding: 50px;
+	padding: 20px;
+	margin-bottom: 50px;
 }
 .options-container {
 	display: flex;
 	flex-direction: column;
-	width: 90%;
-	margin-bottom: 50px;
+	width: 95%;
 }
 .option-btn {
 	padding: 10px;
@@ -27,10 +27,19 @@
 	background-color: #dc143c;
 }
 .display {
-	font-size: 24px;
-	margin-bottom: 25px;
+	font-size: 22px;
+
 	color: #fff;
 }
 .display-container {
+	margin-top: 15px;
 	padding: 10px;
+}
+.progress {
+	align-self: flex-start;
+	margin-bottom: 20px;
+	margin-left: 30px;
+	font-size: 18px;
+	font-family: Poppins;
+	color: #fff;
 }

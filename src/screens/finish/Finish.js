@@ -12,6 +12,7 @@ const Finish = () => {
 	const reset = () => {
 		dispatch({ type: "reset" });
 	};
+
 	return (
 		<div className="container">
 			<div className="items-container">

@@ -41,6 +41,7 @@ const Content = (props) => {
 			dispatch({ type: "completeTrue" });
 		}
 		setClicked(0);
+
 		setIndex((index) => index + 1);
 	};
 	//Timer function
@@ -97,7 +98,7 @@ const Content = (props) => {
 
 	return (
 		<div>
-			<Controls time={time} />
+			<Controls time={time} count={index} />
 			<Display question={quest} />
 			<Options options={option} validate={validate} correct={correct} />
 		</div>

@@ -3,7 +3,7 @@ import "./style.css";
 const Display = (props) => {
 	return (
 		<div className="display-container">
-			<p className="display">{props.question}</p>
+			<div className="display">{props.question}</div>
 		</div>
 	);
 };

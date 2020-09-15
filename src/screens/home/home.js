@@ -23,15 +23,15 @@ const Content = (props) => {
 		if (isValid) {
 			history.push("/quiz");
 		} else {
-			toast("Enter a valid number", {
-				position: "bottom-center",
-				autoClose: "1500",
+			toast.error("Enter a valid number", {
+				position: "top-center",
+				autoClose: 1500,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
 				draggable: false,
 				fontFamily: "Poppins",
-				fontSize: "18px",
+				toastId: "toast",
 				progress: undefined,
 			});
 		}

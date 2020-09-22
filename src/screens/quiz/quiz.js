@@ -5,19 +5,20 @@ import questions from "../../db/QuestionStore";
 import Controls from "./Controls.js";
 import { store } from "../../store";
 
-const Content = (props) => {
+const Quiz = (props) => {
 	const [question] = useState(questions);
 	const [questionId, setQuestionId] = useState([]);
 	const [id, SetId] = useState(1);
 	const [clicked, setClicked] = useState(0);
 	const [index, setIndex] = useState(1);
-	const [time, setTime] = useState(10);
-
+	const [totalTime, setTotalTime] = useState(10);
+	const [time, setTime] = useState(totalTime);
 	const [shuffled, setShuffled] = useState(false);
+
 	//context api
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
-	const { count } = globalState.state;
+	const { count, weapon } = globalState.state;
 
 	//data fetching
 	const quest = question
@@ -32,41 +33,45 @@ const Content = (props) => {
 	//
 	//function will take care of moving to next question
 	const next = () => {
-		setTime(10);
-
 		if (count > 1) {
+			setTime(totalTime);
 			dispatch({ type: "count" });
+			setClicked(0);
+			setIndex((index) => index + 1);
 			SetId(questionId[index]);
 		} else {
 			dispatch({ type: "completeTrue" });
 		}
-		setClicked(0);
-
-		setIndex((index) => index + 1);
 	};
 	//Timer function
 	const timer = () => {
 		setTime((time) => time - 1);
 	};
-	//shuffle an array without repeating values
-	const shuffle = (arr) => {
-		arr.sort(() => Math.random() - 0.5);
-	};
+
 	//Checked if shuffled is true, then shuffle questionId
 
 	if (shuffled) {
-		shuffle(questionId);
+		//	shuffle(questionId);
+		questionId.sort(() => Math.random() - 0.5);
 		SetId(questionId[0]);
 		setShuffled(false);
 	}
 
+	useEffect(() => {
+		if (weapon === "blade") {
+			setTotalTime(10);
+		} else if (weapon === "sword") {
+			setTotalTime(30);
+		}
+		setTime(totalTime);
+	}, []);
 	useEffect(() => {
 		setQuestionId(question.map((id) => id.id));
 
 		setShuffled(true);
 
 		setInterval(timer, 1000);
-
+		console.log("rendered");
 		return () => {
 			clearInterval(timer);
 		};
@@ -95,7 +100,7 @@ const Content = (props) => {
 	if (time === 0) {
 		next();
 	}
-
+	console.log(globalState.state.time);
 	return (
 		<div>
 			<Controls time={time} count={index} />
@@ -105,4 +110,4 @@ const Content = (props) => {
 	);
 };
 
-export default Content;
+export default Quiz;

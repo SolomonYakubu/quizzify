@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { store } from "../../store";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,11 @@ const Finish = () => {
 	const reset = () => {
 		dispatch({ type: "reset" });
 	};
-
+	useEffect(() => {
+		return () => {
+			dispatch({ type: "reset" });
+		};
+	}, [dispatch]);
 	return (
 		<div className="container">
 			<div className="items-container">

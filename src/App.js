@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Quiz from "./screens/quiz/quiz";
-import Home from "./screens/home/home";
+import Quiz from "./screens/quiz/Quiz";
+import Home from "./screens/home/Home";
 import Finish from "./screens/finish/Finish";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import { store } from "./store";
 

@@ -22,9 +22,8 @@ function Controls(props) {
 			<div style={{ width: "100px", color: "#fff" }}>
 				<CircularProgressbarWithChildren
 					value={props.time}
-					maxValue={10}
+					maxValue={30}
 					strokeWidth={10}
-					//styles={{ width: "20px" }}
 				>
 					<div style={{ fontSize: "37px", color: "#fff" }}>{props.time}</div>
 				</CircularProgressbarWithChildren>

@@ -5,7 +5,7 @@ const initialState = {
 	completed: false,
 	score: 0,
 	questionNumber: 0,
-
+	spearMode: false,
 	duration: 0,
 };
 const store = createContext(initialState);
@@ -34,6 +34,12 @@ const StateProvider = ({ children }) => {
 					...state,
 					duration: action.payload,
 				};
+			case "setSpearMode":
+				return {
+					...state,
+					spearMode: action.payload,
+				};
+
 			default:
 				throw new Error();
 		}

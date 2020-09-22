@@ -9,7 +9,7 @@ const Quiz = (props) => {
 	//context api stuffs
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
-	const { count, duration } = globalState.state;
+	const { count, duration, spearMode } = globalState.state;
 
 	//Local states
 	const [question] = useState(questions);
@@ -34,7 +34,9 @@ const Quiz = (props) => {
 	//function will take care of moving to next question
 	const next = useCallback(() => {
 		if (count > 1) {
-			setTime(duration);
+			if (!spearMode) {
+				setTime(duration);
+			}
 			dispatch({ type: "count" });
 			setClicked(0);
 			setIndex((index) => index + 1);
@@ -42,7 +44,7 @@ const Quiz = (props) => {
 		} else {
 			dispatch({ type: "completeTrue" });
 		}
-	}, [count, dispatch, duration, questionId, index]);
+	}, [count, dispatch, duration, questionId, index, spearMode]);
 	//Timer function
 	const timer = () => {
 		setTime((time) => time - 1);
@@ -98,6 +100,7 @@ const Quiz = (props) => {
 		}
 	};
 	//
+	console.log(globalState.state.spearMode);
 
 	return (
 		<div>

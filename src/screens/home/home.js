@@ -18,6 +18,7 @@ const Home = (props) => {
 	const [weapon, setWeapon] = useState("blade");
 	const [time, setTime] = useState(0);
 	const [isValid, setIsValid] = useState(false);
+	const [spearMode, setSpearMode] = useState(false);
 
 	//history api, for navigating routes
 	let history = useHistory();
@@ -48,8 +49,12 @@ const Home = (props) => {
 			case "sword":
 				setTime((time) => 30);
 				break;
+			case "spear":
+				setTime((time) => 60);
+				setSpearMode(true);
+				break;
 			default:
-				setTime((time) => 5);
+				setTime((time) => 10);
 		}
 	}, [onDropChange, weapon]);
 
@@ -57,6 +62,11 @@ const Home = (props) => {
 	const redirect = () => {
 		if (isValid) {
 			dispatch({ type: "setDuration", payload: time });
+			if (spearMode) {
+				dispatch({ type: "setSpearMode", payload: true });
+			} else {
+				dispatch({ type: "setSpearMode", payload: false });
+			}
 			history.push("/quiz");
 		} else {
 			toast.error("Enter a valid number", {

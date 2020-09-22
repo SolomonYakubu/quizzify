@@ -6,21 +6,21 @@ import Controls from "./Controls.js";
 import { store } from "../../store";
 
 const Quiz = (props) => {
+	//context api
+	const globalState = useContext(store);
+	const { dispatch } = globalState;
+	const { count, duration } = globalState.state;
+
+	//Local states
 	const [question] = useState(questions);
 	const [questionId, setQuestionId] = useState([]);
 	const [id, SetId] = useState(1);
 	const [clicked, setClicked] = useState(0);
 	const [index, setIndex] = useState(1);
-	const [totalTime, setTotalTime] = useState(10);
-	const [time, setTime] = useState(totalTime);
+	const [time, setTime] = useState(duration);
 	const [shuffled, setShuffled] = useState(false);
 
-	//context api
-	const globalState = useContext(store);
-	const { dispatch } = globalState;
-	const { count, weapon } = globalState.state;
-
-	//data fetching
+	//data fetching from question store
 	const quest = question
 		.filter((question) => question.id === id)
 		.map((question) => question.question);
@@ -30,11 +30,11 @@ const Quiz = (props) => {
 	const correct = question
 		.filter((question) => question.id === id)
 		.map((question) => question.correct);
-	//
+
 	//function will take care of moving to next question
 	const next = () => {
 		if (count > 1) {
-			setTime(totalTime);
+			setTime(duration);
 			dispatch({ type: "count" });
 			setClicked(0);
 			setIndex((index) => index + 1);
@@ -58,14 +58,6 @@ const Quiz = (props) => {
 	}
 
 	useEffect(() => {
-		if (weapon === "blade") {
-			setTotalTime(10);
-		} else if (weapon === "sword") {
-			setTotalTime(30);
-		}
-		setTime(totalTime);
-	}, []);
-	useEffect(() => {
 		setQuestionId(question.map((id) => id.id));
 
 		setShuffled(true);
@@ -77,6 +69,14 @@ const Quiz = (props) => {
 		};
 	}, [question]);
 
+	//updates time after current time elapses
+	useEffect(() => {
+		if (time === 0) {
+			next();
+		}
+	}, [time]);
+
+	//a function to validate if option selected is right or wrong
 	const validate = (e) => {
 		setClicked((clicked) => clicked + 1);
 		if (clicked === 0) {
@@ -97,10 +97,8 @@ const Quiz = (props) => {
 			clearInterval(timer);
 		}
 	};
-	if (time === 0) {
-		next();
-	}
-	console.log(globalState.state.time);
+	//
+
 	return (
 		<div>
 			<Controls time={time} count={index} />

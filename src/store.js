@@ -5,8 +5,8 @@ const initialState = {
 	completed: false,
 	score: 0,
 	questionNumber: 0,
-	weapon: "blade",
-	time: 0,
+
+	duration: 0,
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -28,15 +28,11 @@ const StateProvider = ({ children }) => {
 					count: action.payload,
 					questionNumber: action.payload,
 				};
-			case "setWeapon":
+
+			case "setDuration":
 				return {
 					...state,
-					weapon: action.payload,
-				};
-			case "setTime":
-				return {
-					...state,
-					time: action.payload,
+					duration: action.payload,
 				};
 			default:
 				throw new Error();

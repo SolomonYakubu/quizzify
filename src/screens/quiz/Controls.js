@@ -5,7 +5,7 @@ import "react-circular-progressbar/dist/styles.css";
 function Controls(props) {
 	const globalState = useContext(store);
 
-	const { questionNumber } = globalState.state;
+	const { questionNumber, duration } = globalState.state;
 	return (
 		<div
 			style={{
@@ -22,7 +22,7 @@ function Controls(props) {
 			<div style={{ width: "100px", color: "#fff" }}>
 				<CircularProgressbarWithChildren
 					value={props.time}
-					maxValue={30}
+					maxValue={duration}
 					strokeWidth={10}
 				>
 					<div style={{ fontSize: "37px", color: "#fff" }}>{props.time}</div>

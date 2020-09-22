@@ -1,16 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
+
 import { useHistory } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { store } from "../../store";
+
 import "./style.css";
 const Home = (props) => {
+	//context api
 	const globalState = useContext(store);
-	const { count, time } = globalState.state;
+	const { count } = globalState.state;
 	const { dispatch } = globalState;
+
+	//local states
 	const [weapon, setWeapon] = useState("blade");
+	const [time, setTime] = useState(0);
 	const [isValid, setIsValid] = useState(false);
 
+	//history api, for navigating routes
 	let history = useHistory();
 	const onChange = (value) => {
 		dispatch({ type: "setCount", payload: value });
@@ -20,38 +29,34 @@ const Home = (props) => {
 			setIsValid(true);
 		}
 	};
-	const weaponSet = () => {
-		// if (weapon.toString() === "blade") {
-		//
-		// } else if (weapon.toString() === "sword") {
-		// 	dispatch({ type: "setTime", payload: 30 });
-		// }
+
+	//a function to set duration by using the value of weapon
+	const setDuration = () => {
 		switch (weapon) {
 			case "blade":
-				dispatch({ type: "setTime", payload: 10 });
+				setTime((time) => 10);
 				break;
 			case "sword":
-				dispatch({ type: "setTime", payload: 30 });
+				setTime((time) => 30);
 				break;
 			default:
-				dispatch({ type: "setTime", payload: 5 });
+				setTime((time) => 5);
 		}
 	};
-	console.log(globalState.state.time);
-	const onDropChange = (e) => {
-		setWeapon(e.target.value);
 
-		weaponSet();
+	const onDropChange = (e) => {
+		const value = e.target.value;
+		setWeapon((weapon) => value);
 	};
 
 	useEffect(() => {
-		return () => {
-			weaponSet();
-		};
-	}, []);
-	console.log(globalState.state.time);
+		setDuration();
+	}, [onDropChange]);
+
+	//a function to redirect to quiz page if all requirements are met
 	const redirect = () => {
 		if (isValid) {
+			dispatch({ type: "setDuration", payload: time });
 			history.push("/quiz");
 		} else {
 			toast.error("Enter a valid number", {

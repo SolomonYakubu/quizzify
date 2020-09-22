@@ -51,6 +51,7 @@
 	border: none;
 	outline: none;
 	width: 100px;
+	border-radius: 10px;
 }
 /* .dropdown option {
 	border-radius: 20px;

@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
 import { store } from "../../store";
 
 import "./style.css";
@@ -37,19 +40,19 @@ const Home = (props) => {
 	// };
 
 	const onDropChange = useCallback((e) => {
-		const value = e.target.value;
+		const value = e.label;
 		setWeapon((weapon) => value);
 	}, []);
 
 	useEffect(() => {
 		switch (weapon) {
-			case "blade":
+			case "Blade":
 				setTime((time) => 10);
 				break;
-			case "sword":
+			case "Sword":
 				setTime((time) => 30);
 				break;
-			case "spear":
+			case "Spear":
 				setTime((time) => 90);
 				setSpearMode(true);
 				break;
@@ -108,11 +111,17 @@ const Home = (props) => {
 					>
 						Choose your weapon
 					</label>
-					<select className="dropdown" value={weapon} onChange={onDropChange}>
+					{/* <select className="dropdown" value={weapon} onChange={onDropChange}>
 						<option value="blade">Blade</option>
 						<option value="sword">Sword</option>
 						<option value="spear">Spear</option>
-					</select>
+					</select> */}
+					<Dropdown
+						options={["Blade", "Sword", "Spear"]}
+						onChange={onDropChange}
+						value={"Blade"}
+						className="dropdown"
+					/>
 				</div>
 
 				<button className="button" onClick={redirect}>

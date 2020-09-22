@@ -6,7 +6,7 @@ import Controls from "./Controls.js";
 import { store } from "../../store";
 
 const Quiz = (props) => {
-	//context api
+	//context api stuffs
 	const globalState = useContext(store);
 	const { dispatch } = globalState;
 	const { count, duration } = globalState.state;

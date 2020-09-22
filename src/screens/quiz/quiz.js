@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import Display from "./Display";
 import Options from "./Options.js";
 import questions from "../../db/QuestionStore";
@@ -32,7 +32,7 @@ const Quiz = (props) => {
 		.map((question) => question.correct);
 
 	//function will take care of moving to next question
-	const next = () => {
+	const next = useCallback(() => {
 		if (count > 1) {
 			setTime(duration);
 			dispatch({ type: "count" });
@@ -42,7 +42,7 @@ const Quiz = (props) => {
 		} else {
 			dispatch({ type: "completeTrue" });
 		}
-	};
+	}, [count, dispatch, duration, questionId, index]);
 	//Timer function
 	const timer = () => {
 		setTime((time) => time - 1);
@@ -74,7 +74,7 @@ const Quiz = (props) => {
 		if (time === 0) {
 			next();
 		}
-	}, [time]);
+	}, [time, next]);
 
 	//a function to validate if option selected is right or wrong
 	const validate = (e) => {

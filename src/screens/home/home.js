@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 
 import { useHistory } from "react-router-dom";
 
@@ -31,7 +31,16 @@ const Home = (props) => {
 	};
 
 	//a function to set duration by using the value of weapon
-	const setDuration = () => {
+	// const setDuration = () => {
+
+	// };
+
+	const onDropChange = useCallback((e) => {
+		const value = e.target.value;
+		setWeapon((weapon) => value);
+	}, []);
+
+	useEffect(() => {
 		switch (weapon) {
 			case "blade":
 				setTime((time) => 10);
@@ -42,16 +51,7 @@ const Home = (props) => {
 			default:
 				setTime((time) => 5);
 		}
-	};
-
-	const onDropChange = (e) => {
-		const value = e.target.value;
-		setWeapon((weapon) => value);
-	};
-
-	useEffect(() => {
-		setDuration();
-	}, [onDropChange]);
+	}, [onDropChange, weapon]);
 
 	//a function to redirect to quiz page if all requirements are met
 	const redirect = () => {

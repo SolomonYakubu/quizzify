@@ -50,7 +50,7 @@ const Home = (props) => {
 				setTime((time) => 30);
 				break;
 			case "spear":
-				setTime((time) => 60);
+				setTime((time) => 120);
 				setSpearMode(true);
 				break;
 			default:

@@ -18,7 +18,7 @@ const questions = [
 		id: 2,
 	},
 	{
-		question: "const arr = [1,2,3] '\n' arr.pop()",
+		question: "const arr = [1,2,3]  arr.pop()",
 		options: ["0", "2", "1", "3"],
 		correct: "3",
 		id: 3,
@@ -113,6 +113,12 @@ const questions = [
 		options: ["Node.js", "Deno", "All of the above", "None of the above"],
 		correct: "All of the above",
 		id: 15,
+	},
+	{
+		question: "Which of the following in not a frontend framework",
+		options: ["React", "Angular", "Vue", "EmberJs"],
+		correct: "React",
+		id: 16,
 	},
 ];
 export default questions;

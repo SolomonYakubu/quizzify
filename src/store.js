@@ -14,7 +14,6 @@ const StateProvider = ({ children }) => {
 	const [state, dispatch] = useReducer((state, action) => {
 		switch (action.type) {
 			case "completeTrue":
-				//const newState = 0;
 				return { ...state, completed: true };
 			case "correct":
 				return { ...state, score: state.score + 10 };

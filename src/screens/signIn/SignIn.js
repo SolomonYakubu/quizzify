@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 const SignIn = () => {
   const history = useHistory();
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
   const localStorage = window.localStorage;
 
-  const onUserNameChange = (val) => {
-    setUserName(val);
+  const onEmailChange = (val) => {
+    setEmail(val);
   };
 
   const onPasswordChange = (val) => {
@@ -24,7 +24,7 @@ const SignIn = () => {
       const response = await axios.post(
         "http://localhost:3002/signIn",
         {
-          username: username,
+          email: email,
 
           password: password,
         },
@@ -34,8 +34,14 @@ const SignIn = () => {
       );
       alert("successful");
       await localStorage.setItem("token", JSON.stringify(response.data));
+      await localStorage.setItem(
+        "refreshToken",
+        JSON.stringify(response.data.refreshToken)
+      );
       console.log(localStorage.getItem("token"));
+      console.log(localStorage.getItem("refreshToken"));
       history.push("/");
+
       // if (response.status === 200) {
       //   alert("Successful");
       // } else {
@@ -57,7 +63,6 @@ const SignIn = () => {
       console.error(err);
     }
   };
-  console.log(username, password);
 
   return (
     <div className="signin-div-container">
@@ -71,10 +76,10 @@ const SignIn = () => {
 
           <input
             type="text"
-            placeholder="Username"
-            value={username}
+            placeholder="Email"
+            value={email}
             className="signin-input username"
-            onChange={(e) => onUserNameChange(e.target.value)}
+            onChange={(e) => onEmailChange(e.target.value)}
             required
           />
 

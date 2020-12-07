@@ -4,6 +4,7 @@ import Home from "./screens/home/Home";
 import Index from "./screens/homepage/Index";
 import Finish from "./screens/finish/Finish";
 import SignIn from "./screens/signIn/SignIn";
+import SignUp from "./screens/signUp/SignUp";
 import { HashRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import { store } from "./store";
@@ -23,6 +24,9 @@ function App() {
         <Route path="/quiz">{completed ? <Finish /> : <Quiz />}</Route>
         <Route path="/sign-in">
           <SignIn />
+        </Route>
+        <Route path="/sign-up">
+          <SignUp />
         </Route>
       </Router>
     </div>

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 const SignUp = () => {
+  const history = useHistory();
   const [name, setName] = useState("");
-  const [username, setUserName] = useState("");
+
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -12,9 +14,7 @@ const SignUp = () => {
   const onNameChange = (val) => {
     setName(val);
   };
-  const onUserNameChange = (val) => {
-    setUserName(val);
-  };
+
   const onEmailChange = (val) => {
     setEmail(val);
   };
@@ -37,7 +37,7 @@ const SignUp = () => {
   const resetForm = () => {
     setName("");
     setEmail("");
-    setUserName("");
+
     setPassword("");
     setConfirmPassword("");
   };
@@ -50,7 +50,7 @@ const SignUp = () => {
           "http://localhost:3002/signUp",
           {
             name: name,
-            username: username,
+
             email: email,
             password: password,
           },
@@ -61,11 +61,12 @@ const SignUp = () => {
         if (response.status === 201) {
           alert("Account created successfully");
           resetForm();
+          history.push("/sign-in");
         }
         console.log(response.data);
       } catch (error) {
         console.error(error.message);
-        alert("The Username is not available");
+        alert("Email already in use");
       }
     } else {
       alert("Passwords didn't match");
@@ -85,20 +86,12 @@ const SignUp = () => {
           <input
             type="text"
             value={name}
-            placeholder="Name"
+            placeholder="Full Name"
             className="signup-input name"
             onChange={(e) => onNameChange(e.target.value)}
             required
           />
 
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            className="signup-input username"
-            onChange={(e) => onUserNameChange(e.target.value)}
-            required
-          />
           <input
             type="email"
             value={email}
@@ -107,7 +100,6 @@ const SignUp = () => {
             onChange={(e) => onEmailChange(e.target.value)}
             required
           />
-
           <input
             type="password"
             placeholder="Password"
